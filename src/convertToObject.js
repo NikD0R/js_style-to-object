@@ -10,12 +10,14 @@ function convertToObject(sourceString) {
 
   const arrayWithNoSpaces = arrayStrings
     .map((element) => element.trim())
-    .filter((element) => element !== ' ');
+    .filter((element) => element.trim() !== ' ');
 
   const result = arrayWithNoSpaces.reduce((status, element) => {
     const parts = element.split(':').map((part) => part.trim());
 
-    return { ...status, [parts[0]]: parts[1] };
+    if (parts[0] !== undefined || parts[1] !== undefined) {
+      return { ...status, [parts[0]]: parts[1] };
+    }
   }, {});
 
   return result;
